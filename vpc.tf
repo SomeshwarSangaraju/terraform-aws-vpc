@@ -19,9 +19,9 @@ resource "aws_internet_gateway" "internet_gateway" {
 
   tags =merge(
     var.igw_tags,
-    locals.common_tags,
+    local.common_tags,
     {
-        Name=locals.common_suffix_name
+        Name=local.common_suffix_name
     }
   )
 }
