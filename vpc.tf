@@ -31,12 +31,14 @@ resource "aws_subnet" "public" {
   count = length(var.public_subnet_cidr)
   vpc_id     = aws_vpc.main.id
   cidr_block = var.public_subnet_cidr[count.index]
+  availablity_zone = local.az_names[count.index]
+  map_public_ip_on_launch = true
   
   tags = merge(
-    var.igw_tags,
+    var.public_subnet_tags,
     local.common_tags,
     {
-        Name=local.common_suffix_name
+        Name="${local.common_suffix_name}-public-${local.az_names[count.index]}"
     }
   )
 }
