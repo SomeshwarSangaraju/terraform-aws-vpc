@@ -1,3 +1,4 @@
+#vpc
 resource "aws_vpc" "main" {
   cidr_block       = var.vpc_cidr
   instance_tenancy = var.instance_tentency
@@ -12,10 +13,25 @@ resource "aws_vpc" "main" {
   )
 }
 
-# resource "aws_internet_gateway" "internet_gateway" {
-#   vpc_id = aws_vpc.main.id
+#IGW
+resource "aws_internet_gateway" "internet_gateway" {
+  vpc_id = aws_vpc.main.id
 
-#   tags = {
-#     Name = "main"
-#   }
-# }
+  tags =merge(
+    var.igw_tags,
+    locals.common_tags,
+    {
+        Name=locals.common_suffix_name
+    }
+  )
+}
+
+#subnets
+resource "aws_subnet" "public_subnet" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = var.public_subnet_cidr
+
+  tags = {
+    Name = "Main"
+  }
+}
