@@ -27,11 +27,11 @@ resource "aws_internet_gateway" "internet_gateway" {
 }
 
 #subnets
-resource "aws_subnet" "public_subnet" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = var.public_subnet_cidr
+# resource "aws_subnet" "public" {
+#   vpc_id     = aws_vpc.main.id
+#   cidr_block = var.public_subnet_cidr
 
-  tags = {
-    Name = "Main"
-  }
-}
+#   tags = {
+#     Name = "Main"
+#   }
+# }
