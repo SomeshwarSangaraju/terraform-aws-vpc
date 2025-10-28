@@ -123,3 +123,16 @@ resource "aws_route" "public" {
   gateway_id = aws_internet_gateway.internet_gateway.id
 }
 
+# elastic ip
+resource "aws_eip" "elastic_ip" {
+  domain   = "vpc"
+
+  tags =  merge(
+    var.elastic_ip_tags,
+    local.common_tags,
+    {
+        Name="${local.common_suffix_name}-elastic_ip"
+    }
+  )
+}
+

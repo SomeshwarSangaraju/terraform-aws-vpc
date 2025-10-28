@@ -67,3 +67,7 @@ variable "database_route_table_tags"{
     default={}
 }
 
+variable "elastic_ip_tags"{
+    type=map
+    default={}
+}
