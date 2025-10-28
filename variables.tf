@@ -71,3 +71,8 @@ variable "elastic_ip_tags"{
     type=map
     default={}
 }
+
+variable "nat_tags"{
+    type=map
+    default={}
+}
