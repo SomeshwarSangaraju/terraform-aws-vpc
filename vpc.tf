@@ -138,7 +138,7 @@ resource "aws_eip" "elastic_ip" {
 
 # nat gateway
 resource "aws_nat_gateway" "nat" {
-  allocation_id = aws_eip.elastic_ip
+  allocation_id = aws_eip.elastic_ip.id
   subnet_id     = aws_subnet.public[0].id
 
    tags =  merge(
