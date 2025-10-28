@@ -17,7 +17,7 @@ resource "aws_vpc" "main" {
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.main.id
 
-  tags =merge(
+  tags = merge(
     var.igw_tags,
     local.common_tags,
     {
@@ -27,11 +27,16 @@ resource "aws_internet_gateway" "internet_gateway" {
 }
 
 #subnets
-# resource "aws_subnet" "public" {
-#   vpc_id     = aws_vpc.main.id
-#   cidr_block = var.public_subnet_cidr
-
-#   tags = {
-#     Name = "Main"
-#   }
-# }
+resource "aws_subnet" "public" {
+  count = length(var.public_subnet_cidr)
+  vpc_id     = aws_vpc.main.id
+  cidr_block = var.public_subnet_cidr[count.index]
+  
+  tags = merge(
+    var.igw_tags,
+    local.common_tags,
+    {
+        Name=local.common_suffix_name
+    }
+  )
+}
