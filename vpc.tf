@@ -4,11 +4,11 @@ resource "aws_vpc" "main" {
   instance_tenancy = var.instance_tentency
   enable_dns_hostnames = true
 
-  tags =merge(
+  tags = merge(
     var.vpc_tags,
-    locals.common_tags,
+    local.common_tags,
     {
-        Name=locals.common_suffix_name
+        Name=local.common_suffix_name
     }
   )
 }
