@@ -52,7 +52,7 @@ resource "aws_subnet" "private" {
   map_public_ip_on_launch = true
   
   tags = merge(
-    var.private_subnet_cidr,
+    var.private_subnet_tags,
     local.common_tags,
     {
         Name="${local.common_suffix_name}-private-${local.az_names[count.index]}"
@@ -69,7 +69,7 @@ resource "aws_subnet" "database" {
   map_public_ip_on_launch = true
   
   tags = merge(
-    var.database_subnet_cidr,
+    var.database_subnet_tags,
     local.common_tags,
     {
         Name="${local.common_suffix_name}-database-${local.az_names[count.index]}"
