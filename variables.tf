@@ -76,3 +76,8 @@ variable "nat_tags"{
     type=map
     default={}
 }
+
+variable "isPeering"{
+    type=bool
+    default=true
+}
