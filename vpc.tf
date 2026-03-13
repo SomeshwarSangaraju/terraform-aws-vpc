@@ -49,7 +49,6 @@ resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.main.id
   cidr_block = var.private_subnet_cidrs[count.index]
   availability_zone = local.az_names[count.index]
-  map_public_ip_on_launch = true
   
   tags = merge(
     var.private_subnet_tags,
@@ -66,7 +65,6 @@ resource "aws_subnet" "database" {
   vpc_id     = aws_vpc.main.id
   cidr_block = var.database_subnet_cidrs[count.index]
   availability_zone = local.az_names[count.index]
-  map_public_ip_on_launch = true
   
   tags = merge(
     var.database_subnet_tags,
